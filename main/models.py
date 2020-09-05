@@ -30,18 +30,13 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-ROLES = (
-    ('StoreOwner', _('StoreOwner')),
-    ('Customer', _('Customer')),
-    ('Administrator', _('Administrator'))
-)
 
 class User(AbstractBaseUser, PermissionsMixin):
     #Custom user model.
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255, unique=True)
     phone_number = models.CharField(max_length=20)
-    role = models.CharField(max_length=20, choices=ROLES)
+    role = models.CharField(max_length=20)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
