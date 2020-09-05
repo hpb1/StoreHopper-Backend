@@ -24,8 +24,7 @@ class StoreRegister(APIView):
         if obj.is_valid():
             obj.save()
             return Response({
-                'status': 'added',
-                'id': obj.id
+                'status': 'added'
             },status=201)
         else:
             return Response({
