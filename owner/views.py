@@ -12,10 +12,10 @@ class StoreRegister(APIView):
     parser_classes = [JSONParser]
 
     def get(self,request):
-    owner = request.user.id
-    obj = Store.objects.get(owner=owner)
-    serializer = StoreSerializer(obj, many=True)
-    return Response(serializer.data,status=200)
+        owner = request.user.id
+        obj = Store.objects.get(owner=owner)
+        serializer = StoreSerializer(obj, many=True)
+        return Response(serializer.data,status=200)
 
 
     def post(self,request):
