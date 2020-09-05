@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Store, Item
-from .serializers import StoreSerializer, ItemSerializer
+from .models import Store
+from .serializers import StoreSerializer
 from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework.views import APIView

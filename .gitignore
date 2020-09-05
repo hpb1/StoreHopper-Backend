@@ -3,3 +3,5 @@
 /owner/__pycache__
 /main/migrations
 /owner/migrations
+/customer/__pycache__
+/customer/migrations
