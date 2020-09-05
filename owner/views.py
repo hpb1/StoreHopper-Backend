@@ -11,13 +11,21 @@ class StoreRegister(APIView):
     permission_classes = [permissions.IsAuthenticated]
     parser_classes = [JSONParser]
 
+    def get(self,request)
+    owner = request.user.id
+    obj = Store.objects.get(owner=owner)
+    serializer = StoreSerializer(obj, many=True)
+    return Response(serializer.data,status=200)
+
+
     def post(self,request):
         request.data['owner'] = request.user.id
         obj = StoreSerializer(data=request.data)
         if obj.is_valid():
             obj.save()
             return Response({
-                'status': 'added'
+                'status': 'added',
+                'id': obj.id
             },status=201)
         else:
             return Response({
