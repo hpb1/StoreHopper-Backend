@@ -43,7 +43,7 @@ class StoreRequestView(APIView):
 
     def get(self,request,pk):
         try:
-            obj = ItemRequest.objects.all(store=pk2)
+            obj = ItemRequest.objects.all(store=pk)
             serializer = RequestSerializer(obj, many=True)
             return Response(serializer.data,status=200)
         except:
