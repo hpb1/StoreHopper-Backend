@@ -11,7 +11,7 @@ class StoreRegister(APIView):
     permission_classes = [permissions.IsAuthenticated]
     parser_classes = [JSONParser]
 
-    def get(self,request)
+    def get(self,request):
     owner = request.user.id
     obj = Store.objects.get(owner=owner)
     serializer = StoreSerializer(obj, many=True)
