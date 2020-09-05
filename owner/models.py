@@ -14,6 +14,6 @@ class Store(models.Model):
     address = models.TextField()
     city = models.TextField()
     peak_time = models.CharField(max_length=30, default=None)
-    pin_code = models.CharField(max_length=10)
+    zip_code = models.CharField(max_length=10)
     latitude = models.CharField(max_length=30)
     longitude = models.CharField(max_length=30)
