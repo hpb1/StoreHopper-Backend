@@ -13,7 +13,7 @@ class StoreRegister(APIView):
 
     def get(self,request):
         owner = request.user.id
-        obj = Store.objects.get(owner=owner)
+        obj = Store.objects.filter(owner=owner)
         serializer = StoreSerializer(obj, many=True)
         return Response(serializer.data,status=200)
 
