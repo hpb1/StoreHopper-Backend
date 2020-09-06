@@ -62,10 +62,10 @@ class StoreRequestView(APIView):
             },status=404)
 
     def post(self, request, pk): #itemrequest id
-        obj = ItemRequest.objects.get(id=pk)
-        obj.fulfillment = True
-        if obj.is_valid():
-            obj.save
+        try:
+            obj = ItemRequest.objects.get(id=pk)
+            obj.fulfillment = True
+            obj.save()
             return Response({
                 'status': 'fulfilled'
             },status=200)
