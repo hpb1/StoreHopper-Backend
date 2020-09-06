@@ -69,7 +69,7 @@ class StoreRequestView(APIView):
             return Response({
                 'status': 'fulfilled'
             },status=200)
-        else:
+        except:
             return Response({
                 'Request not found.'
             },status=404)
