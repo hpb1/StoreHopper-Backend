@@ -11,7 +11,7 @@ class CustomerRequestView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     parser_classes = [JSONParser]
 
-    def post(self,request,pk):
+    def post(self,request,pk): #store id
         request.data['customer'] = request.user.id
         request.data['store'] = pk
         obj = RequestSerializer(data=request.data)
@@ -25,9 +25,9 @@ class CustomerRequestView(APIView):
                 'Invalid request.'
             }, status=400)
 
-    def delete(self,request,pk):
+    def delete(self,request,pk): #itemrequest id
         try:
-            obj = ItemRequest.objects.filter(id=pk)
+            obj = ItemRequest.objects.get(id=pk)
             obj.delete()
             return Response({
                 'status': 'deleted'
@@ -41,12 +41,25 @@ class StoreRequestView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     parser_classes = [JSONParser]
 
-    def get(self,request,pk):
+    def get(self,request,pk): #store id
         try:
-            obj = ItemRequest.objects.all(store=pk)
+            obj = ItemRequest.objects.filter(store=pk, fulfillment=False)
             serializer = RequestSerializer(obj, many=True)
             return Response(serializer.data,status=200)
         except:
             return Response({
                 'Requests not found.'
+            },status=404)
+
+    def post(self, request, pk): #itemrequest id
+        obj = ItemRequest.objects.get(id=pk)
+        obj.fulfillment = True
+        if obj.is_valid():
+            obj.save
+            return Response({
+                'status': 'fulfilled'
+            },status=200)
+        else:
+            return Response({
+                'Request not found.'
             },status=404)

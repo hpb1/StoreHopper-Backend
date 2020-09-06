@@ -12,3 +12,4 @@ class ItemRequest(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
     items = models.TextField()
     message = models.TextField()
+    fulfillment = models.BooleanField(default=False)

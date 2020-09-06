@@ -43,7 +43,7 @@ class StoreRegister(APIView):
             })
 
 
-    def delete(self,request,pk):
+    def delete(self,request, pk):
         try:
             obj = Store.objects.filter(id=pk)
             obj.delete()
