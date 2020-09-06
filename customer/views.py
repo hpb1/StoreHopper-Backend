@@ -11,6 +11,16 @@ class CustomerRequestView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     parser_classes = [JSONParser]
 
+    def get(self,request): #store id
+        try:
+            obj = ItemRequest.objects.filter(customer=request.user.id)
+            serializer = RequestSerializer(obj, many=True)
+            return Response(serializer.data,status=200)
+        except:
+            return Response({
+                'Invalid Request.'
+            }, status=400)
+
     def post(self,request,pk): #store id
         request.data['customer'] = request.user.id
         request.data['store'] = pk
